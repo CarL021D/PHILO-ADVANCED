@@ -55,7 +55,7 @@ bool	philo_is_eating(t_philo *philo)
 	// printf("\n\n%d  ERROR\n\n\n", philo->index);
 	
 	if (philo_died(philo))
-		return (true);
+		return (false);
 		
 	// if (!philo_died(philo))
 	// {
@@ -75,7 +75,7 @@ bool	philo_is_eating(t_philo *philo)
 	pthread_mutex_unlock(&philo->next->left_fork);
 	pthread_mutex_unlock(&philo->left_fork);
 	// }
-	return (false);
+	return (true);
 
 
 
@@ -121,13 +121,13 @@ bool	philo_is_eating(t_philo *philo)
 bool    philo_is_sleeping(t_philo *philo)
 {
 	if (philo_died(philo))
-		return (true);
+		return (false);
 	// if (!philo_died(philo))
 	// {
 	mutex_print(philo, ACTION_ID, "is sleeping\n");
 	ft_usleep(philo, philo->data->time_to_sleep);
 	// }
-	return (false);
+	return (true);
 
 
 
@@ -154,12 +154,12 @@ bool	philo_is_thinking(t_philo *philo)
 	// pthread_mutex_lock(&philo->data->philo_has_died_mutex);
 	// if (!philo->data->philo_has_died || (option && !philo->philo_is_full))
 	if (philo_died(philo))
-		return (true);
+		return (false);
 	// if (!philo_died(philo))	
 	// {
 		mutex_print(philo, ACTION_ID, "is thinking\n");
 	// }
-		return (false);
+		return (true);
 		// mutex_print(philo, "is thinking\n");
 	// pthread_mutex_unlock(&philo->data->philo_has_died_mutex);
 }

@@ -25,8 +25,8 @@ void	launch_philo_routine(t_philo **philo_lst, t_data *data)
 		philo = philo->next;
 		i++;
 	}
-	// Usleep to avoid creating a mutex for the data->nb_of_philos variable 
-	usleep(40);
+	// Usleep to synchronise the moment when we check the routine 
+	usleep(100);
 }
 
 void	philo_routine(t_philo *philo)
@@ -38,9 +38,8 @@ void	philo_routine(t_philo *philo)
 		desync_action_for_odd_philo_count(philo);
 	while (!philo_died(philo) ||  !all_philo_full(philo))
 	{
-		// ERROR INFINITE
-		if (!philo_is_eating(philo) || !philo_is_sleeping(philo)
-		|| !philo_is_thinking(philo))
+		if (!philo_is_eating(philo) && !philo_is_sleeping(philo)
+		&& !philo_is_thinking(philo))
 			return ;
 		usleep(100);
 	}
