@@ -53,10 +53,7 @@ int		kill_philo_if_possible(t_philo *philo)
 		pthread_mutex_unlock(&philo->last_meal_time_mutex);
 		pthread_mutex_lock(&philo->data->philo_has_died_mutex);
 		philo->data->philo_has_died = true;
-		
-		mutex_print(philo, DIE_ID, "died\n");
-		// mutex_print(philo, "died\n");
-		
+		mutex_print(philo, DIE_ID, "died\n");		
 		pthread_mutex_unlock(&philo->data->philo_has_died_mutex);
 		return (true);
 	}

@@ -28,7 +28,7 @@ void	ft_usleep(t_philo *philo, long time)
 	long	current_time;
 	
 	current_time = get_current_time();
-	while (get_current_time() - current_time < time * 1000)
+	while (((get_current_time() - current_time) * 1000) < (time * 1000))
 	{
 		if (philo_died(philo))
 			return ;
@@ -49,22 +49,20 @@ void	ft_usleep(t_philo *philo, long time)
 void	desync_action_for_even_philo_count(t_philo *philo)
 {
 	if (philo->index % 2)
-		usleep(philo->data->time_to_eat * 1000);
+		ft_usleep(philo, philo->data->time_to_eat);
+		// usleep(philo->data->time_to_eat * 1000);
 }
 
 void	desync_action_for_odd_philo_count(t_philo *philo)
 {
 	int		time;
 
-	if (philo->data->nb_of_philos == 1)
-		return ;
+	time = philo->data->time_to_eat;
 	if (philo->index == philo->data->nb_of_philos)
-		time = (philo->data->time_to_eat * 2);
+		time *= 2;
 	if (philo->index % 2 == 0)
-		time = philo->data->time_to_eat;
-	else
-		return ;
-	usleep(time * 1000);
+		ft_usleep(philo, time);
+	// usleep(time * 1000);
 }
 
 int	ft_atoi(const char *nptr)

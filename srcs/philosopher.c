@@ -25,19 +25,25 @@ void	launch_philo_routine(t_philo **philo_lst, t_data *data)
 		philo = philo->next;
 		i++;
 	}
-	// Usleep to synchronise the moment when we check the routine 
+	// Usleep to synchronise the moment when we check the routine out
 	usleep(100);
 }
 
 void	philo_routine(t_philo *philo)
 { 
-	// todo: - func exec routine for one philo
+	// TODO: - func exec routine for one philo
 	if (philo->data->nb_of_philos % 2 == 0)
 		desync_action_for_even_philo_count(philo);
 	else
 		desync_action_for_odd_philo_count(philo);
 	while (!philo_died(philo) ||  !all_philo_full(philo))
 	{
+		// if (!philo_is_eating(philo))
+		// 	return ;
+		// if (!philo_is_sleeping(philo))
+		// 	return ;
+		// if (!philo_is_thinking(philo))
+		// 	return ;
 		if (!philo_is_eating(philo) && !philo_is_sleeping(philo)
 		&& !philo_is_thinking(philo))
 			return ;
