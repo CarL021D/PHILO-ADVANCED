@@ -35,8 +35,9 @@ bool	philo_is_eating(t_philo *philo)
 	mutex_print(philo, ACTION_ID,"has taken a fork\n");
 	mutex_print(philo, ACTION_ID, "has taken a fork\n");
 	pthread_mutex_lock(&philo->last_meal_time_mutex);
+	// TODO: - Check philo last meal time variable, error l.39
 	philo->last_meal_time = get_current_time() /* - philo->data->launch_time*/;
-	printf("last meal %ld\n, launch time %ld\n", philo->last_meal_time, philo->data->launch_time);
+	// printf("last meal %ld\n, launch time %ld\n", philo->last_meal_time, philo->data->launch_time);
 	pthread_mutex_unlock(&philo->last_meal_time_mutex);
 	mutex_print(philo, ACTION_ID, "is eating\n");
 	pthread_mutex_lock(&philo->total_meals_eaten_mutex);

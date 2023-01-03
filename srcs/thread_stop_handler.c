@@ -48,6 +48,7 @@ int		all_philo_full(t_philo *philo)
 int		kill_philo_if_possible(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->last_meal_time_mutex);
+	// TODO: - Formula to check, error l.51 
 	if (get_current_time() - philo->last_meal_time > philo->data->time_to_die)
 	{
 		pthread_mutex_unlock(&philo->last_meal_time_mutex);
