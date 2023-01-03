@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:19:40 by caboudar          #+#    #+#             */
-/*   Updated: 2022/12/31 05:37:50 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/03 19:41:13 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,28 @@ void	launch_philo_routine(t_philo **philo_lst, t_data *data)
 	usleep(100);
 }
 
+bool	single_philo_routine(t_philo *philo)
+{
+	if (philo->data->nb_of_philos != 1)
+		return (false);
+	pthread_mutex_lock(&philo->left_fork);
+	mutex_print(philo, ACTION_ID,"has taken a fork\n");
+	pthread_mutex_unlock(&philo->left_fork);
+	usleep(philo->data->time_to_die);
+	mutex_print(philo, DIE_ID, "has died\n");
+	return (true);
+}
+
+
 void	philo_routine(t_philo *philo)
 { 
-	// TODO: - func exec routine for one philo
+	if (single_philo_routine(philo))
+		return ;
 	if (philo->data->nb_of_philos % 2 == 0)
 		desync_action_for_even_philo_count(philo);
 	else
 		desync_action_for_odd_philo_count(philo);
-	while (!philo_died(philo) ||  !all_philo_full(philo))
+	while (!philo_died(philo)/* ||  !all_philo_full(philo)*/)
 	{
 		// if (!philo_is_eating(philo))
 		// 	return ;
@@ -57,14 +71,14 @@ void	stop_routine_if_philo_dead_or_full(t_philo **philo_lst, t_data *data)
 	int			i;
 
 	philo = *philo_lst;
-	while (!philo_died(philo) || !all_philo_full(philo))
+	while (!philo_died(philo) /*|| !all_philo_full(philo)*/)
 	{
 		philo = *philo_lst;
 		i = 0;
 		while (i < data->nb_of_philos)
 		{
 			if (kill_philo_if_possible(philo)
-				|| try_to_set_all_philo_to_full(philo, data))
+				/*|| try_to_set_all_philo_to_full(philo, data)*/)
 					return ;
 			i++;
 			philo = philo->next;

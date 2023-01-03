@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:19:55 by caboudar          #+#    #+#             */
-/*   Updated: 2022/12/31 00:59:02 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/03 18:05:38 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ long	get_current_time(void)
 	return (time);
 }
 
-
 void	ft_usleep(t_philo *philo, long time)
 {
 	long	current_time;
@@ -33,24 +32,13 @@ void	ft_usleep(t_philo *philo, long time)
 		if (philo_died(philo))
 			return ;
 		usleep(100);
-		
-		// pthread_mutex_lock(&philo->data->philo_has_died_mutex);
-		// if (philo->data->philo_has_died)
-		// {
-		// 	pthread_mutex_unlock(&philo->data->philo_has_died_mutex);
-		// 	return ;
-		// }		
-		// pthread_mutex_unlock(&philo->data->philo_has_died_mutex);
-		// usleep(100);
 	}
 }
-
 
 void	desync_action_for_even_philo_count(t_philo *philo)
 {
 	if (philo->index % 2)
 		ft_usleep(philo, philo->data->time_to_eat);
-		// usleep(philo->data->time_to_eat * 1000);
 }
 
 void	desync_action_for_odd_philo_count(t_philo *philo)
@@ -60,9 +48,8 @@ void	desync_action_for_odd_philo_count(t_philo *philo)
 	time = philo->data->time_to_eat;
 	if (philo->index == philo->data->nb_of_philos)
 		time *= 2;
-	if (philo->index % 2 == 0)
+	if (philo->index % 2 == 0 && philo->data->nb_of_philos != 1)
 		ft_usleep(philo, time);
-	// usleep(time * 1000);
 }
 
 int	ft_atoi(const char *nptr)

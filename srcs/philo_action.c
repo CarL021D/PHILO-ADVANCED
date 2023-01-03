@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:19:30 by caboudar          #+#    #+#             */
-/*   Updated: 2022/12/31 05:29:05 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/03 18:28:07 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 void	mutex_print(t_philo *philo, int id, char *message)
 {
 	long	current_time;
-	
+
 	pthread_mutex_lock(&philo->data->lock_print);
 	current_time = get_current_time() - philo->data->launch_time;
 	if (id == DIE_ID)
 		printf("%ld - %d %s\n", current_time, philo->index, message);
-	else if (!philo_died(philo) || !all_philo_full(philo))		
+	else if (!philo_died(philo) || !all_philo_full(philo))
 		printf("%ld - %d %s\n", current_time, philo->index, message);
 	pthread_mutex_unlock(&philo->data->lock_print);
 }
@@ -31,12 +31,17 @@ bool	philo_is_eating(t_philo *philo)
 	if (philo_died(philo))
 		return (false);
 	pthread_mutex_lock(&philo->left_fork);
+	if (philo->next == NULL)
+		return (usleep(philo->data->time_to_die),
+			pthread_mutex_unlock(&philo->left_fork), false);
 	pthread_mutex_lock(&philo->next->left_fork);
-	mutex_print(philo, ACTION_ID,"has taken a fork\n");
+	mutex_print(philo, ACTION_ID, "has taken a fork\n");
 	mutex_print(philo, ACTION_ID, "has taken a fork\n");
 	pthread_mutex_lock(&philo->last_meal_time_mutex);
 	// TODO: - Check philo last meal time variable, error l.39
-	philo->last_meal_time = get_current_time() /* - philo->data->launch_time*/;
+	philo->last_meal_time = get_current_time();
+	// printf("last_meal_time: %ld, current time: %ld\n\n", philo->last_meal_time, get_current_time());
+	// printf(" NMT >>>> %ld\n\n", philo->last_meal_time - philo->data->launch_time);
 	// printf("last meal %ld\n, launch time %ld\n", philo->last_meal_time, philo->data->launch_time);
 	pthread_mutex_unlock(&philo->last_meal_time_mutex);
 	mutex_print(philo, ACTION_ID, "is eating\n");
@@ -49,7 +54,7 @@ bool	philo_is_eating(t_philo *philo)
 	return (true);
 }
 
-bool    philo_is_sleeping(t_philo *philo)
+bool	philo_is_sleeping(t_philo *philo)
 {
 	if (philo_died(philo))
 		return (false);

@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:20:28 by caboudar          #+#    #+#             */
-/*   Updated: 2022/12/31 02:46:45 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/03 19:22:45 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ bool	philo_is_thinking(t_philo *node);
 void	mutex_print(t_philo *philo, int id, char *message);
 // void	mutex_print(t_philo *philo, char *message);
 
-int		all_philo_full(t_philo *philo);
-int		philo_died(t_philo *philo);
-int		kill_philo_if_possible(t_philo *philo);
+bool		all_philo_full(t_philo *philo);
+bool		philo_died(t_philo *philo);
+bool		kill_philo_if_possible(t_philo *philo);
 
 //				LINKED LIST
 t_philo	*create_node(void);
@@ -84,7 +84,7 @@ void	free_linked_list(t_philo **philo_lst, t_data *data);
 void	philo_routine(t_philo *philo);
 void	launch_philo_routine(t_philo **philo_lst, t_data *data);
 void	stop_routine_if_philo_dead_or_full(t_philo **philo_lst, t_data *data);
-int		try_to_set_all_philo_to_full(t_philo *philo, t_data *data);
+bool	try_to_set_all_philo_to_full(t_philo *philo, t_data *data);
 int		destroy_threads(t_philo **philo_lst, t_data *data);
 
 //				MUTEX

@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:19:20 by caboudar          #+#    #+#             */
-/*   Updated: 2022/12/31 05:30:32 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/03 19:40:39 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,12 +149,12 @@ static void     init_philo_struct(t_philo **philo_lst, t_data *data)
 	while (i < data->nb_of_philos)
 	{
 		philo->index = (i + 1);
-		philo->last_meal_time = 0;
+		philo->last_meal_time = get_current_time();
 		philo->total_meals_eaten = 0;
 		philo->data = data;
 		if (data->max_meal_option == true)
 			philo->philo_is_full = false;
-		if (data->nb_of_philos > 1 && (i == data->nb_of_philos - 1))
+		if (data->nb_of_philos > 1 && ((i + 1) == data->nb_of_philos))
 			philo->next = *philo_lst;
 		else
 			philo = philo->next;

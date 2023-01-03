@@ -6,14 +6,16 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:23:04 by caboudar          #+#    #+#             */
-/*   Updated: 2022/12/30 23:28:10 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/03 19:38:27 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-int		philo_died(t_philo *philo)
+bool	philo_died(t_philo *philo)
 {
+	printf("<<<<%d\n", philo->index);
+	// printf(">>>%d\n", philo->data->time_to_die);
 	pthread_mutex_lock(&philo->data->philo_has_died_mutex);
 	if (philo->data->philo_has_died == true)
 	{
@@ -24,7 +26,9 @@ int		philo_died(t_philo *philo)
 	return (false);
 }
 
-int		all_philo_full(t_philo *philo)
+
+
+bool	all_philo_full(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->every_philo_full_mutex);
 	if (philo->data->max_meal_option == false)
@@ -41,16 +45,13 @@ int		all_philo_full(t_philo *philo)
 	return (false);
 }
 
-
-
-
-
-int		kill_philo_if_possible(t_philo *philo)
+bool	kill_philo_if_possible(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->last_meal_time_mutex);
 	// TODO: - Formula to check, error l.51 
-	if (get_current_time() - philo->last_meal_time > philo->data->time_to_die)
+	if (get_current_time() > philo->last_meal_time + philo->data->time_to_die)
 	{
+		// printf("%ld > %ld", get_current_time(), philo->last_meal_time + philo->data->time_to_die);
 		pthread_mutex_unlock(&philo->last_meal_time_mutex);
 		pthread_mutex_lock(&philo->data->philo_has_died_mutex);
 		philo->data->philo_has_died = true;
@@ -62,8 +63,7 @@ int		kill_philo_if_possible(t_philo *philo)
 	return (false);
 }
 
-
-int		try_to_set_all_philo_to_full(t_philo *philo, t_data *data)
+bool	try_to_set_all_philo_to_full(t_philo *philo, t_data *data)
 {
 	int		i;
 
