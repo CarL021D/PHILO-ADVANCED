@@ -6,13 +6,12 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:19:30 by caboudar          #+#    #+#             */
-/*   Updated: 2023/01/03 18:28:07 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/03 21:55:23 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-// void	mutex_print(t_philo *philo, char *message)
 void	mutex_print(t_philo *philo, int id, char *message)
 {
 	long	current_time;
@@ -38,11 +37,7 @@ bool	philo_is_eating(t_philo *philo)
 	mutex_print(philo, ACTION_ID, "has taken a fork\n");
 	mutex_print(philo, ACTION_ID, "has taken a fork\n");
 	pthread_mutex_lock(&philo->last_meal_time_mutex);
-	// TODO: - Check philo last meal time variable, error l.39
 	philo->last_meal_time = get_current_time();
-	// printf("last_meal_time: %ld, current time: %ld\n\n", philo->last_meal_time, get_current_time());
-	// printf(" NMT >>>> %ld\n\n", philo->last_meal_time - philo->data->launch_time);
-	// printf("last meal %ld\n, launch time %ld\n", philo->last_meal_time, philo->data->launch_time);
 	pthread_mutex_unlock(&philo->last_meal_time_mutex);
 	mutex_print(philo, ACTION_ID, "is eating\n");
 	pthread_mutex_lock(&philo->total_meals_eaten_mutex);
@@ -70,5 +65,3 @@ bool	philo_is_thinking(t_philo *philo)
 	mutex_print(philo, ACTION_ID, "is thinking\n");
 	return (true);
 }
-
-// printf("\n\nERROR\n\n\n");

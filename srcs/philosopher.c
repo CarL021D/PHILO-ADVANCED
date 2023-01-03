@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:19:40 by caboudar          #+#    #+#             */
-/*   Updated: 2023/01/03 19:41:13 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/03 21:38:24 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ void	philo_routine(t_philo *philo)
 		// 	return ;
 		// if (!philo_is_thinking(philo))
 		// 	return ;
-		if (!philo_is_eating(philo) && !philo_is_sleeping(philo)
-		&& !philo_is_thinking(philo))
-			return ;
+		if (!philo_is_eating(philo) || !philo_is_sleeping(philo)
+		|| !philo_is_thinking(philo))
+		// 	return ;
 		usleep(100);
 	}
 }
