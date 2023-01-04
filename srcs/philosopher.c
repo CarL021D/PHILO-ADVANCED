@@ -37,7 +37,8 @@ bool	single_philo_routine(t_philo *philo)
 	mutex_print(philo, ACTION_ID,"has taken a fork\n");
 	pthread_mutex_unlock(&philo->left_fork);
 	usleep(philo->data->time_to_die);
-	mutex_print(philo, DIE_ID, "has died\n");
+	// printf(">>>> %d \n", philo->data->time_to_die);
+	// mutex_print(philo, DIE_ID, "has died\n");
 	return (true);
 }
 
@@ -52,15 +53,9 @@ void	philo_routine(t_philo *philo)
 		desync_action_for_odd_philo_count(philo);
 	while (!philo_died(philo)/* ||  !all_philo_full(philo)*/)
 	{
-		// if (!philo_is_eating(philo))
-		// 	return ;
-		// if (!philo_is_sleeping(philo))
-		// 	return ;
-		// if (!philo_is_thinking(philo))
-		// 	return ;
 		if (!philo_is_eating(philo) || !philo_is_sleeping(philo)
 		|| !philo_is_thinking(philo))
-		// 	return ;
+			return ;
 		usleep(100);
 	}
 }
