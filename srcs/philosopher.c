@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:19:40 by caboudar          #+#    #+#             */
-/*   Updated: 2023/01/03 21:38:24 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/04 23:24:29 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	launch_philo_routine(t_philo **philo_lst, t_data *data)
 		i++;
 	}
 	// Usleep to synchronise the moment when we check the routine out
-	usleep(100);
+	usleep(50);
 }
 
 bool	single_philo_routine(t_philo *philo)

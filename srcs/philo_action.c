@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:19:30 by caboudar          #+#    #+#             */
-/*   Updated: 2023/01/03 21:55:23 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/04 21:15:14 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	mutex_print(t_philo *philo, int id, char *message)
 	current_time = get_current_time() - philo->data->launch_time;
 	if (id == DIE_ID)
 		printf("%ld - %d %s\n", current_time, philo->index, message);
-	else if (!philo_died(philo) || !all_philo_full(philo))
+	else if (!philo_died(philo)/* || !all_philo_full(philo)*/)
 		printf("%ld - %d %s\n", current_time, philo->index, message);
 	pthread_mutex_unlock(&philo->data->lock_print);
 }

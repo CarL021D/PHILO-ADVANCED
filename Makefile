@@ -6,7 +6,7 @@
 #    By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/24 15:12:48 by caboudar          #+#    #+#              #
-#    Updated: 2022/12/26 19:24:57 by caboudar         ###   ########.fr        #
+#    Updated: 2023/01/04 23:20:51 by caboudar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,7 @@ SRCS	= 		srcs/philosopher.c 				\
 
 OBJS	= ${SRCS:.c=.o}
 
-CFLAGS	= -Wall -Werror -Wextra -g
-
+CFLAGS	= -Wall -Werror -Wextra -g3 #-fsanitize=thread
 CC		= gcc
 
 RM		= rm -f

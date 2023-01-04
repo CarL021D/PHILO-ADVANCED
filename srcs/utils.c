@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:19:55 by caboudar          #+#    #+#             */
-/*   Updated: 2023/01/03 18:05:38 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/04 23:21:47 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_usleep(t_philo *philo, long time)
 	{
 		if (philo_died(philo))
 			return ;
-		usleep(100);
+		usleep(50);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:19:20 by caboudar          #+#    #+#             */
-/*   Updated: 2023/01/03 19:40:39 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/04 23:15:37 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,13 @@ void	free_linked_list(t_philo **philo_lst, t_data *data)
 	t_philo		*philo;
 	int			i;
 
-	philo = *philo_lst;
 	i = 0;
 	while (i < data->nb_of_philos)
 	{
-		*philo_lst = (*philo_lst)->next;
-		free(philo);
+		philo = (*philo_lst)->next;
+		free(*philo_lst);
+		*philo_lst = philo;
 		i++;
-		philo = *philo_lst;
 	}
 }
 
@@ -71,7 +70,7 @@ int		destroy_threads(t_philo **philo_lst, t_data *data)
 	i = 0;
 	while (i < data->nb_of_philos)
 	{
-		if (!pthread_join(philo->thread, NULL))
+		if (pthread_join(philo->thread, NULL))
 			return (ERROR);
 		i++;
 		philo = philo->next;
@@ -121,7 +120,7 @@ void	init_mutex(t_philo **philo_lst, t_data *data)
 	}
 }
 
-static int  init_struct(t_data *data, int ac, char **av)
+void	init_struct(t_data *data, int ac, char **av)
 {
 	data->nb_of_philos = ft_atoi(av[1]);
 	data->time_to_die = ft_atoi(av[2]);
@@ -136,7 +135,6 @@ static int  init_struct(t_data *data, int ac, char **av)
 		data->max_meal_option = true;
 		data->every_philo_full = false;
 	}
-	return (1);
 }
 
 static void     init_philo_struct(t_philo **philo_lst, t_data *data)
@@ -164,9 +162,8 @@ static void     init_philo_struct(t_philo **philo_lst, t_data *data)
 
 int    init_data(t_philo **philo_lst, t_data *data, int ac, char **av)
 {
-	if (init_struct(data, ac, av) == ERROR)
-		return (ERROR);
-	create_linked_list(data, philo_lst);	
+	init_struct(data, ac, av);
+	// create_linked_list(data, philo_lst);
 	if (create_linked_list(data, philo_lst) == ERROR)
 	{
 		free_list(philo_lst);
@@ -174,5 +171,5 @@ int    init_data(t_philo **philo_lst, t_data *data, int ac, char **av)
 	}
 	init_philo_struct(philo_lst, data);
 	init_mutex(philo_lst, data);
-	return (1);
+	return (true);
 }
