@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:19:40 by caboudar          #+#    #+#             */
-/*   Updated: 2023/01/05 06:09:45 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/05 06:15:01 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,11 @@ void	routine_exec_if_one_philo_only(t_philo *philo)
 	pthread_mutex_unlock(&philo->data->philo_has_died_mutex);
 	usleep(philo->data->time_to_die);
 	mutex_print(philo, DIE_ID, "has died\n");
-
-	// usleep(philo->data->time_to_die);
-	// return (true);
 }
-
 
 void	philo_routine(t_philo *philo)
 {
 	routine_exec_if_one_philo_only(philo);
-	// if (routine_exec_if_one_philo_only(philo))
-	// 	return ;
 	if (philo->data->nb_of_philos % 2 == 0)
 		desync_action_for_even_philo_count(philo);
 	else
