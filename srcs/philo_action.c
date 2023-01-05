@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:19:30 by caboudar          #+#    #+#             */
-/*   Updated: 2023/01/04 21:15:14 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/05 06:02:08 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,6 @@ bool	philo_is_eating(t_philo *philo)
 	if (philo_died(philo))
 		return (false);
 	pthread_mutex_lock(&philo->left_fork);
-	if (philo->next == NULL)
-		return (usleep(philo->data->time_to_die),
-			pthread_mutex_unlock(&philo->left_fork), false);
 	pthread_mutex_lock(&philo->next->left_fork);
 	mutex_print(philo, ACTION_ID, "has taken a fork\n");
 	mutex_print(philo, ACTION_ID, "has taken a fork\n");

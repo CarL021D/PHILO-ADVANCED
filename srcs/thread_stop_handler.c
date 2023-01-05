@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:23:04 by caboudar          #+#    #+#             */
-/*   Updated: 2023/01/04 00:14:05 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/04 23:35:57 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ bool	kill_philo_if_possible(t_philo *philo)
 		pthread_mutex_unlock(&philo->last_meal_time_mutex);
 		pthread_mutex_lock(&philo->data->philo_has_died_mutex);
 		philo->data->philo_has_died = true;
-		mutex_print(philo, DIE_ID, "died\n");		
 		pthread_mutex_unlock(&philo->data->philo_has_died_mutex);
+		mutex_print(philo, DIE_ID, "died\n");		
 		return (true);
 	}
 	pthread_mutex_unlock(&philo->last_meal_time_mutex);
