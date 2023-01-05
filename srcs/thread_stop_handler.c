@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:23:04 by caboudar          #+#    #+#             */
-/*   Updated: 2023/01/04 23:35:57 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/05 15:26:17 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,6 @@ static bool		max_meal_option(t_philo *philo)
 	return (false);
 }
 
-
-
-
-
 bool	philo_died(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->philo_has_died_mutex);
@@ -44,6 +40,7 @@ bool	all_philo_full(t_philo *philo)
 {
 	if (!max_meal_option(philo))
 		return (false);
+	pthread_mutex_lock(&philo->data->every_philo_full_mutex);
 	if (philo->data->every_philo_full == true)
 	{
 		pthread_mutex_unlock(&philo->data->every_philo_full_mutex);

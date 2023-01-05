@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:19:40 by caboudar          #+#    #+#             */
-/*   Updated: 2023/01/05 06:15:01 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/05 15:30:37 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	launch_philo_routine(t_philo **philo_lst, t_data *data)
 		pthread_create(&philo->thread, NULL, (void*)&philo_routine, philo);
 		philo = philo->next;
 		i++;
-		usleep(50);
+		// usleep(50);
 	}
 	// Usleep to synchronise the moment when we check the routine out
 	usleep(50);
@@ -52,7 +52,8 @@ void	philo_routine(t_philo *philo)
 		desync_action_for_even_philo_count(philo);
 	else
 		desync_action_for_odd_philo_count(philo);
-	while (!philo_died(philo)/* ||  !all_philo_full(philo)*/)
+	// while (!all_philo_full(philo) || !philo_died(philo))
+	while (!philo_died(philo) || !all_philo_full(philo))
 	{
 		if (!philo_is_eating(philo) || !philo_is_sleeping(philo)
 		|| !philo_is_thinking(philo))
@@ -66,17 +67,18 @@ void	stop_routine_if_philo_dead_or_full(t_philo **philo_lst, t_data *data)
 	t_philo		*philo;
 	int			i;
 
-	if ((*philo_lst)->data->nb_of_philos == 1)
+	if (data->nb_of_philos == 1)
 		return ;
 	philo = *philo_lst;
-	while (!philo_died(philo) /*|| !all_philo_full(philo)*/)
+	// while (!all_philo_full(philo) || !philo_died(philo))
+	while (!philo_died(philo) || !all_philo_full(philo))
 	{
 		philo = *philo_lst;
 		i = 0;
 		while (i < data->nb_of_philos)
 		{
 			if (kill_philo_if_possible(philo)
-				/*|| try_to_set_all_philo_to_full(philo, data)*/)
+				|| try_to_set_all_philo_to_full(philo, data))
 					return ;
 			i++;
 			philo = philo->next;

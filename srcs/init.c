@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:19:20 by caboudar          #+#    #+#             */
-/*   Updated: 2023/01/04 23:15:37 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/05 14:28:14 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,6 @@ static void     init_philo_struct(t_philo **philo_lst, t_data *data)
 int    init_data(t_philo **philo_lst, t_data *data, int ac, char **av)
 {
 	init_struct(data, ac, av);
-	// create_linked_list(data, philo_lst);
 	if (create_linked_list(data, philo_lst) == ERROR)
 	{
 		free_list(philo_lst);
