@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:19:30 by caboudar          #+#    #+#             */
-/*   Updated: 2023/01/05 14:09:47 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/09 19:24:52 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ bool	philo_is_eating(t_philo *philo)
 		return (false);
 	pthread_mutex_lock(&philo->left_fork);
 	pthread_mutex_lock(&philo->next->left_fork);
-	mutex_print(philo, ACTION_ID, "has taken a fork\n");
-	mutex_print(philo, ACTION_ID, "has taken a fork\n");
+	mutex_print(philo, ACTION_ID, "has taken a fork");
+	mutex_print(philo, ACTION_ID, "has taken a fork");
 	pthread_mutex_lock(&philo->last_meal_time_mutex);
 	philo->last_meal_time = get_current_time();
 	pthread_mutex_unlock(&philo->last_meal_time_mutex);
-	mutex_print(philo, ACTION_ID, "is eating\n");
+	mutex_print(philo, ACTION_ID, "is eating");
 	pthread_mutex_lock(&philo->total_meals_eaten_mutex);
 	philo->total_meals_eaten++;
 	pthread_mutex_unlock(&philo->total_meals_eaten_mutex);
@@ -50,7 +50,7 @@ bool	philo_is_sleeping(t_philo *philo)
 {
 	if (philo_died(philo) || all_philo_full(philo))
 		return (false);
-	mutex_print(philo, ACTION_ID, "is sleeping\n");
+	mutex_print(philo, ACTION_ID, "is sleeping");
 	ft_usleep(philo, philo->data->time_to_sleep);
 	return (true);
 }
@@ -59,6 +59,6 @@ bool	philo_is_thinking(t_philo *philo)
 {
 	if (philo_died(philo) || all_philo_full(philo))
 		return (false);
-	mutex_print(philo, ACTION_ID, "is thinking\n");
+	mutex_print(philo, ACTION_ID, "is thinking");
 	return (true);
 }

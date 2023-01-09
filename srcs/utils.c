@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:19:55 by caboudar          #+#    #+#             */
-/*   Updated: 2023/01/05 00:40:20 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/09 20:08:19 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ long	get_current_time(void)
 {
 	struct timeval	tv;
 	long			time;
-	
+
 	gettimeofday(&tv, NULL);
 	time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
 	return (time);
@@ -25,7 +25,7 @@ long	get_current_time(void)
 void	ft_usleep(t_philo *philo, long time)
 {
 	long	current_time;
-	
+
 	current_time = get_current_time();
 	while (((get_current_time() - current_time) * 1000) < (time * 1000))
 	{
@@ -54,8 +54,8 @@ void	desync_action_for_odd_philo_count(t_philo *philo)
 
 int	ft_atoi(const char *nptr)
 {
-	long long   res;
-	int	sign;
+	long long	res;
+	int			sign;
 
 	while ((*nptr >= 9 && *nptr <= 13) || *nptr == ' ')
 		nptr++;

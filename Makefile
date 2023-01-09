@@ -6,7 +6,7 @@
 #    By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/24 15:12:48 by caboudar          #+#    #+#              #
-#    Updated: 2023/01/04 23:40:16 by caboudar         ###   ########.fr        #
+#    Updated: 2023/01/09 20:07:08 by caboudar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,12 @@ NAME = philosopher
 
 SRCS	= 		srcs/philosopher.c 				\
 				srcs/init.c						\
+				srcs/linked_list_handler.c		\
 				srcs/check_errors.c				\
-				srcs/thread_stop_handler.c		\
+				srcs/routine.c					\
+				srcs/routine_handler.c			\
 				srcs/philo_action.c 			\
 				srcs/utils.c					\
-				srcs/free.c						\
 
 OBJS	= ${SRCS:.c=.o}
 

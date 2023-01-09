@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:20:28 by caboudar          #+#    #+#             */
-/*   Updated: 2023/01/04 22:56:56 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/09 20:06:01 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ typedef struct s_data
 	int					max_nb_of_meals;
 	int					every_philo_full;
 	long				launch_time;
-}   t_data;
+}	t_data;
 
 typedef struct s_philo
 {
 	pthread_t			thread;
-	pthread_mutex_t	    left_fork;
-	pthread_mutex_t	    total_meals_eaten_mutex;
+	pthread_mutex_t		left_fork;
+	pthread_mutex_t		total_meals_eaten_mutex;
 	pthread_mutex_t		last_meal_time_mutex;
 	int					index;
 	int					philo_is_full;
@@ -54,7 +54,7 @@ typedef struct s_philo
 	long				last_meal_time;
 	struct s_data		*data;
 	struct s_philo		*next;
-}   t_philo;
+}	t_philo;
 
 //				INIT
 int		init_data(t_philo **philo, t_data *data, int ac, char **av);
@@ -69,16 +69,15 @@ bool	philo_is_thinking(t_philo *node);
 void	mutex_print(t_philo *philo, int id, char *message);
 // void	mutex_print(t_philo *philo, char *message);
 
-bool		all_philo_full(t_philo *philo);
-bool		philo_died(t_philo *philo);
-bool		kill_philo_if_possible(t_philo *philo);
+bool	all_philo_full(t_philo *philo);
+bool	philo_died(t_philo *philo);
+bool	kill_philo_if_possible(t_philo *philo);
 
 //				LINKED LIST
 t_philo	*create_node(void);
 int		create_linked_list(t_data *data, t_philo **philo_lst);
 void	free_list(t_philo **philo);
 void	free_linked_list(t_philo **philo_lst, t_data *data);
-
 
 //				THREAD
 void	philo_routine(t_philo *philo);

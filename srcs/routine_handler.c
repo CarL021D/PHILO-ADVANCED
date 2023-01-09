@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread_stop_handler.c                              :+:      :+:    :+:   */
+/*   routine_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:23:04 by caboudar          #+#    #+#             */
-/*   Updated: 2023/01/05 15:26:17 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/09 20:00:15 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-static bool		max_meal_option(t_philo *philo)
+static bool	max_meal_option(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->max_meal_option_mutex);
 	if (philo->data->max_meal_option == true)
@@ -59,7 +59,7 @@ bool	kill_philo_if_possible(t_philo *philo)
 		pthread_mutex_lock(&philo->data->philo_has_died_mutex);
 		philo->data->philo_has_died = true;
 		pthread_mutex_unlock(&philo->data->philo_has_died_mutex);
-		mutex_print(philo, DIE_ID, "died\n");		
+		mutex_print(philo, DIE_ID, "died");
 		return (true);
 	}
 	pthread_mutex_unlock(&philo->last_meal_time_mutex);

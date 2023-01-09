@@ -6,77 +6,11 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:19:20 by caboudar          #+#    #+#             */
-/*   Updated: 2023/01/05 14:28:14 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/09 19:58:22 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
-
-t_philo	*create_node(void)
-{
-	t_philo	*node;
-
-	node = malloc(sizeof(t_philo));
-	if (!node)
-		return (NULL);
-	node->next = NULL;
-	return (node);
-}
-
-int		create_linked_list(t_data *data, t_philo **philo_lst)
-{
-	t_philo		*philo;
-	int			i;
-
-	i = 1;
-	philo = create_node();
-	if (!philo)
-		return (ERROR);
-	*philo_lst = philo;
-	while (i < data->nb_of_philos)
-	{
-		philo = *philo_lst;
-		while (philo->next)
-			philo = philo->next;
-		philo->next = create_node();
-		if (!philo)
-			return (ERROR);
-		i++;
-	}
-	return (1);
-}
-
-void	free_linked_list(t_philo **philo_lst, t_data *data)
-{
-	t_philo		*philo;
-	int			i;
-
-	i = 0;
-	while (i < data->nb_of_philos)
-	{
-		philo = (*philo_lst)->next;
-		free(*philo_lst);
-		*philo_lst = philo;
-		i++;
-	}
-}
-
-int		destroy_threads(t_philo **philo_lst, t_data *data)
-{
-	t_philo		*philo;
-	int			i;
-
-	philo = *philo_lst;
-	i = 0;
-	while (i < data->nb_of_philos)
-	{
-		if (pthread_join(philo->thread, NULL))
-			return (ERROR);
-		i++;
-		philo = philo->next;
-	}
-	return (0);
-}
 
 void	destroy_mutex(t_philo **philo_lst, t_data *data)
 {
@@ -137,10 +71,10 @@ void	init_struct(t_data *data, int ac, char **av)
 	}
 }
 
-static void     init_philo_struct(t_philo **philo_lst, t_data *data)
+static void	init_philo_struct(t_philo **philo_lst, t_data *data)
 {
-	t_philo     *philo;
-	int         i;
+	t_philo		*philo;
+	int			i;
 
 	philo = (*philo_lst);
 	i = 0;
@@ -160,7 +94,7 @@ static void     init_philo_struct(t_philo **philo_lst, t_data *data)
 	}
 }
 
-int    init_data(t_philo **philo_lst, t_data *data, int ac, char **av)
+int	init_data(t_philo **philo_lst, t_data *data, int ac, char **av)
 {
 	init_struct(data, ac, av);
 	if (create_linked_list(data, philo_lst) == ERROR)
