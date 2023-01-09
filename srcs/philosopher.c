@@ -58,7 +58,7 @@ void	philo_routine(t_philo *philo)
 		if (!philo_is_eating(philo) || !philo_is_sleeping(philo)
 		|| !philo_is_thinking(philo))
 			return ;
-		usleep(100);
+		usleep(200);
 	}
 }
 

@@ -27,7 +27,7 @@ void	mutex_print(t_philo *philo, int id, char *message)
 
 bool	philo_is_eating(t_philo *philo)
 {
-	if (philo_died(philo))
+	if (philo_died(philo) || all_philo_full(philo))
 		return (false);
 	pthread_mutex_lock(&philo->left_fork);
 	pthread_mutex_lock(&philo->next->left_fork);
@@ -48,7 +48,7 @@ bool	philo_is_eating(t_philo *philo)
 
 bool	philo_is_sleeping(t_philo *philo)
 {
-	if (philo_died(philo))
+	if (philo_died(philo) || all_philo_full(philo))
 		return (false);
 	mutex_print(philo, ACTION_ID, "is sleeping\n");
 	ft_usleep(philo, philo->data->time_to_sleep);
@@ -57,7 +57,7 @@ bool	philo_is_sleeping(t_philo *philo)
 
 bool	philo_is_thinking(t_philo *philo)
 {
-	if (philo_died(philo))
+	if (philo_died(philo) || all_philo_full(philo))
 		return (false);
 	mutex_print(philo, ACTION_ID, "is thinking\n");
 	return (true);

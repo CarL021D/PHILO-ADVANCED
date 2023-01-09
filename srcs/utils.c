@@ -31,7 +31,7 @@ void	ft_usleep(t_philo *philo, long time)
 	{
 		if (philo_died(philo))
 			return ;
-		usleep(50);
+		usleep(100);
 	}
 }
 
