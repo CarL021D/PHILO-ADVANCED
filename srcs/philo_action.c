@@ -20,7 +20,7 @@ void	mutex_print(t_philo *philo, int id, char *message)
 	current_time = get_current_time() - philo->data->launch_time;
 	if (id == DIE_ID)
 		printf("%ld - %d %s\n", current_time, philo->index, message);
-	else if (!philo_died(philo) || !all_philo_full(philo))
+	else if (!philo_died(philo) && !all_philo_full(philo))
 		printf("%ld - %d %s\n", current_time, philo->index, message);
 	pthread_mutex_unlock(&philo->data->lock_print);
 }

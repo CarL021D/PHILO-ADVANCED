@@ -52,6 +52,17 @@ static int	exit_if_params_errors(int ac, char **av)
 		write(2, "Error, param value must be greater than zero\n", 45);
 		return (ERROR);
 	}
+	if (ft_atoi(av[3]) == 0)
+	{
+		write(2, "Philosophers need time to eat\n", 30);
+		return (ERROR);
+	}
+	if (ft_atoi(av[4]) == 0)
+	{
+		write(2, "Philosophers need time to sleep\n", 32);
+		return (ERROR);
+	}
+
 	return (0);
 }
 
