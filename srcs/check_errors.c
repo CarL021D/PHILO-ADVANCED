@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:20:18 by caboudar          #+#    #+#             */
-/*   Updated: 2023/01/09 19:51:34 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/13 19:36:31 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@ static int	exit_if_params_errors(int ac, char **av)
 		write(2, "Error, param value must be greater than zero\n", 45);
 		return (ERROR);
 	}
+	if (ft_atoi(av[2]) == 0)
+	{
+		write(2, "Philophers need a time to die greater than 0\n", 45);
+		return (ERROR);
+	}
 	if (ft_atoi(av[3]) == 0)
 	{
 		write(2, "Philosophers need time to eat\n", 30);
@@ -62,7 +67,6 @@ static int	exit_if_params_errors(int ac, char **av)
 		write(2, "Philosophers need time to sleep\n", 32);
 		return (ERROR);
 	}
-
 	return (0);
 }
 
