@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 19:17:38 by caboudar          #+#    #+#             */
-/*   Updated: 2023/01/09 20:10:34 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/20 19:49:00 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@ void	routine_exec_if_one_philo_only(t_philo *philo)
 	pthread_mutex_lock(&philo->left_fork);
 	mutex_print(philo, ACTION_ID, "has taken a fork");
 	pthread_mutex_unlock(&philo->left_fork);
-	usleep(philo->data->time_to_die);
+	usleep(philo->data->time_to_die * 1000);
 	pthread_mutex_lock(&philo->data->philo_has_died_mutex);
 	philo->data->philo_has_died = true;
 	pthread_mutex_unlock(&philo->data->philo_has_died_mutex);
-	usleep(philo->data->time_to_die);
 	mutex_print(philo, DIE_ID, "has died");
 }
 
