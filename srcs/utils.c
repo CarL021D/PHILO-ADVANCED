@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:19:55 by caboudar          #+#    #+#             */
-/*   Updated: 2023/01/09 20:08:19 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/22 18:05:13 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	ft_atoi(const char *nptr)
 		nptr++;
 	}
 	res = 0;
-	while (*nptr >= '0' && *nptr <= '9')
+	while (*nptr >= '0' && *nptr <= '9' && res < INT_MAX)
 	{
 		res = res * 10 + *nptr - 48;
 		nptr++;
