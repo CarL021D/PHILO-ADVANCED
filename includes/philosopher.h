@@ -6,7 +6,7 @@
 /*   By: caboudar <caboudar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:20:28 by caboudar          #+#    #+#             */
-/*   Updated: 2023/01/09 20:06:01 by caboudar         ###   ########.fr       */
+/*   Updated: 2023/01/22 15:30:40 by caboudar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,7 @@ void	desync_action_for_odd_philo_count(t_philo *philo);
 bool	philo_is_eating(t_philo *philo);
 bool	philo_is_sleeping(t_philo *node);
 bool	philo_is_thinking(t_philo *node);
-
 void	mutex_print(t_philo *philo, int id, char *message);
-// void	mutex_print(t_philo *philo, char *message);
-
 bool	all_philo_full(t_philo *philo);
 bool	philo_died(t_philo *philo);
 bool	kill_philo_if_possible(t_philo *philo);
